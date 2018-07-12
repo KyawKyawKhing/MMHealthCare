@@ -13,7 +13,7 @@ import com.aceplus.mmhealthcare.persistence.Dao.HealthcareInfoDao
 @Database(entities = arrayOf(HealthcareInfo::class), version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
-    public abstract fun healthcareInfoDao(): HealthcareInfoDao
+    abstract fun healthcareInfoDao(): HealthcareInfoDao
 
     companion object {
         private val DB_NAME = "Health_Care.DB"

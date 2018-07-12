@@ -30,14 +30,15 @@ class MainActivity : AppCompatActivity(), HomeView, HomeDelegate {
         rvHealthInfo.layoutManager = LinearLayoutManager(this)
         mPresenter = HomePresenter(this)
         mPresenter!!.getAllHealthInfo().observe(this, Observer<List<HealthcareInfo>> { response -> displayHealthInfoList(response!!) })
+        mPresenter!!.getErrorMessage().observe(this, Observer<String> { message -> displayMessage(message!!) })
     }
 
     override fun displayHealthInfoList(dataList: List<HealthcareInfo>) {
         mAdapter!!.setNewList(dataList)
     }
 
-    override fun displayMessage(messagae: String) {
-        Toast.makeText(applicationContext, messagae, Toast.LENGTH_SHORT).show()
+    override fun displayMessage(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onTapItemList(url: String) {

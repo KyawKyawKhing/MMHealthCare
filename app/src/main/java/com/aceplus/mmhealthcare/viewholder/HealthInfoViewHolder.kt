@@ -14,16 +14,17 @@ class HealthInfoViewHolder(itemView: View, private val delegate: HomeDelegate) :
     override fun setData(data: HealthcareInfo) {
         this.data = data
         Glide.with(itemView.context)
+                .load(data.author!!.authorPicture)
+                .into(itemView.ivAuthor)
+        itemView.tvAuthorName.text = data.author!!.authorName
+        itemView.tvPublishedDate.text = data.publishedDate
+
+        Glide.with(itemView.context)
                 .load(data.image)
                 .into(itemView.ivHealthInfo)
         itemView.tvHealthInfoTitle.text = data.title
         itemView.tvHealthInfoDesp.text = data.shortDescription
         itemView.tvFileUrl.text = data.completeUrl
-
-        itemView.tvAuthorName.text = data.author!!.authorName
-        Glide.with(itemView.context)
-                .load(data.author!!.authorPicture)
-                .into(itemView.ivAuthor)
 
         itemView.setOnClickListener(this)
     }

@@ -11,7 +11,6 @@ import io.reactivex.annotations.NonNull
  * Created by kkk on 7/10/2018.
  */
 @Entity(tableName = "health_care_info")
-//@TypeConverters(AuthorTypeConvertor::class)
 class HealthcareInfo {
 
     @NonNull

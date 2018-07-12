@@ -1,6 +1,7 @@
 package com.aceplus.mmhealthcare.data.model
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import com.aceplus.mmhealthcare.AppConstants
 import com.aceplus.mmhealthcare.data.vo.GetHealthInfoResponse
@@ -30,7 +31,7 @@ class HealthCareModel(context: Context) : BaseModel(context) {
         }
     }
 
-    fun fetchDataFromNetwork() {
+    fun fetchDataFromNetwork(mErrorLiveData: MutableLiveData<String>?) {
         mApiService!!.getHealthInfo(AppConstants.access_token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -45,6 +46,7 @@ class HealthCareModel(context: Context) : BaseModel(context) {
                     }
 
                     override fun onError(e: Throwable) {
+                        mErrorLiveData!!.value = e.message
                     }
 
                     override fun onSubscribe(d: Disposable) {

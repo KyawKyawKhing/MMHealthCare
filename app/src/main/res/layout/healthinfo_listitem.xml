@@ -32,7 +32,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
                 android:layout_toEndOf="@+id/ivAuthor"
-                android:text="Mg Mg" />
+                android:text="Mg Mg"
+                android:textColor="#3b3939"
+                android:textStyle="bold" />
 
             <org.mmtextview.components.MMTextView
                 android:id="@+id/tvPublishedDate"
@@ -42,7 +44,8 @@
                 android:layout_margin="@dimen/margin_medium"
                 android:layout_toEndOf="@+id/ivAuthor"
                 android:gravity="right"
-                android:text="12/12/2018" />
+                android:text="12/12/2018"
+                android:textColor="#3b3939" />
         </RelativeLayout>
 
         <View
@@ -50,7 +53,7 @@
             android:layout_height="1dp"
             android:layout_marginBottom="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
-            android:background="#e7dddd" />
+            android:background="#efeaea" />
 
         <org.mmtextview.components.MMTextView
             android:id="@+id/tvHealthInfoTitle"
@@ -58,6 +61,7 @@
             android:layout_height="wrap_content"
             android:padding="3dp"
             android:text="title"
+            android:textColor="#3b3939"
             android:textStyle="bold" />
 
         <ImageView
@@ -71,7 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:text="brief" />
+            android:text="brief"
+            android:textColor="#3b3939" />
 
         <org.mmtextview.components.MMTextView
             android:id="@+id/tvFileUrl"
@@ -79,7 +84,7 @@
             android:layout_height="wrap_content"
             android:padding="3dp"
             android:text="notice file path"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#303F9F"
             android:textSize="12sp"
             android:textStyle="italic" />
 
