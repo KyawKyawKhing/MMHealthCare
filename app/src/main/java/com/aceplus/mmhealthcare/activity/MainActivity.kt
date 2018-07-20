@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import android.widget.Toast
 import com.aceplus.mmhealthcare.R
 import com.aceplus.mmhealthcare.adapter.HealthInfoListAdapter
@@ -29,8 +30,15 @@ class MainActivity : AppCompatActivity(), HomeView, HomeDelegate {
         rvHealthInfo.adapter = mAdapter
         rvHealthInfo.layoutManager = LinearLayoutManager(this)
         mPresenter = HomePresenter(this)
-        mPresenter!!.getAllHealthInfo().observe(this, Observer<List<HealthcareInfo>> { response -> displayHealthInfoList(response!!) })
-        mPresenter!!.getErrorMessage().observe(this, Observer<String> { message -> displayMessage(message!!) })
+        progressBar.visibility = View.VISIBLE
+        mPresenter!!.getAllHealthInfo().observe(this, Observer<List<HealthcareInfo>> { response ->
+            displayHealthInfoList(response!!)
+            progressBar.visibility = View.GONE
+        })
+        mPresenter!!.getErrorMessage().observe(this, Observer<String> { message ->
+            displayMessage(message!!)
+            progressBar.visibility = View.GONE
+        })
     }
 
     override fun displayHealthInfoList(dataList: List<HealthcareInfo>) {
