@@ -1,6 +1,6 @@
 package com.aceplus.mmhealthcare.network
 
-import com.aceplus.mmhealthcare.data.vo.GetHealthInfoResponse
+import com.aceplus.mmhealthcare.network.response.GetHealthInfoResponse
 import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

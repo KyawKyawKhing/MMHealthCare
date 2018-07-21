@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="3dp"
+    card_view:cardElevation="2dp"
     card_view:cardUseCompatPadding="true">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -68,7 +68,7 @@
             android:id="@+id/ivHealthInfo"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:adjustViewBounds="true" />
+            android:src="@drawable/ic_launcher_background" />
 
         <org.mmtextview.components.MMTextView
             android:id="@+id/tvHealthInfoDesp"

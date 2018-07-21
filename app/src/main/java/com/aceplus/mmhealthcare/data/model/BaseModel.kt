@@ -1,13 +1,12 @@
 package com.aceplus.mmhealthcare.data.model
 
 import android.content.Context
-import com.aceplus.mmhealthcare.AppConstants
+import com.aceplus.mmhealthcare.utils.AppConstants
 import com.aceplus.mmhealthcare.network.ApiService
 import com.aceplus.mmhealthcare.persistence.AppDatabase
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -15,8 +14,8 @@ import java.util.concurrent.TimeUnit
  * Created by kkk on 7/10/2018.
  */
 abstract class BaseModel(context: Context) {
-    protected var mApiService: ApiService? = null
-    protected var mAppDatabase: AppDatabase? = null
+    protected var mApiService: ApiService
+    protected var mAppDatabase: AppDatabase
 
     init {
         val httpClient = OkHttpClient.Builder()

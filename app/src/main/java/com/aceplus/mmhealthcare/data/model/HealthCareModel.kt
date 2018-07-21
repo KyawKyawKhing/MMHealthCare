@@ -3,9 +3,9 @@ package com.aceplus.mmhealthcare.data.model
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.content.Context
-import com.aceplus.mmhealthcare.AppConstants
-import com.aceplus.mmhealthcare.data.vo.GetHealthInfoResponse
-import com.aceplus.mmhealthcare.data.vo.HealthcareInfo
+import com.aceplus.mmhealthcare.utils.AppConstants
+import com.aceplus.mmhealthcare.network.response.GetHealthInfoResponse
+import com.aceplus.mmhealthcare.data.vo.HealthcareInfoVO
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -32,7 +32,7 @@ class HealthCareModel(context: Context) : BaseModel(context) {
     }
 
     fun fetchDataFromNetwork(mErrorLiveData: MutableLiveData<String>?) {
-        mApiService!!.getHealthInfo(AppConstants.access_token)
+        mApiService.getHealthInfo(AppConstants.access_token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<GetHealthInfoResponse> {
@@ -41,8 +41,13 @@ class HealthCareModel(context: Context) : BaseModel(context) {
                     }
 
                     override fun onNext(response: GetHealthInfoResponse) {
-                        if (response.healthcareInfo != null && response.healthcareInfo!!.isNotEmpty())
-                            saveIntoDB(response.healthcareInfo)
+                        if (response.code == 200) {
+                            if (response.healthcareInfo != null && response.healthcareInfo!!.isNotEmpty()) {
+                                saveIntoDB(response.healthcareInfo)
+                            } else mErrorLiveData!!.value = "No Data to display"
+                        } else if (response.code == 403) {
+                            mErrorLiveData!!.value = response.message
+                        }
                     }
 
                     override fun onError(e: Throwable) {
@@ -55,11 +60,11 @@ class HealthCareModel(context: Context) : BaseModel(context) {
                 })
     }
 
-    private fun saveIntoDB(list: List<HealthcareInfo>?) {
-        mAppDatabase!!.healthcareInfoDao().insertAll(list!!)
+    private fun saveIntoDB(list: List<HealthcareInfoVO>?) {
+        mAppDatabase.healthcareInfoDao().insertAll(list!!)
     }
 
-    fun getAllHealthInfo(): LiveData<List<HealthcareInfo>> {
-        return mAppDatabase!!.healthcareInfoDao().getAllData()
+    fun getAllHealthInfo(): LiveData<List<HealthcareInfoVO>> {
+        return mAppDatabase.healthcareInfoDao().getAllData()
     }
 }

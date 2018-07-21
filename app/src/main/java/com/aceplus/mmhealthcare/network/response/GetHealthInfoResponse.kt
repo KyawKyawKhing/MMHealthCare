@@ -1,5 +1,6 @@
-package com.aceplus.mmhealthcare.data.vo
+package com.aceplus.mmhealthcare.network.response
 
+import com.aceplus.mmhealthcare.data.vo.HealthcareInfoVO
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -15,6 +16,6 @@ class GetHealthInfoResponse {
 
     @SerializedName("healthcare-info")
     @Expose
-    var healthcareInfo: List<HealthcareInfo>? = null
+    var healthcareInfo: List<HealthcareInfoVO>? = null
 
 }

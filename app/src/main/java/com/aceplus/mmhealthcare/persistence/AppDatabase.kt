@@ -4,13 +4,13 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import com.aceplus.mmhealthcare.data.vo.HealthcareInfo
+import com.aceplus.mmhealthcare.data.vo.HealthcareInfoVO
 import com.aceplus.mmhealthcare.persistence.Dao.HealthcareInfoDao
 
 /**
  * Created by kkk on 7/11/2018.
  */
-@Database(entities = arrayOf(HealthcareInfo::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(HealthcareInfoVO::class), version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun healthcareInfoDao(): HealthcareInfoDao

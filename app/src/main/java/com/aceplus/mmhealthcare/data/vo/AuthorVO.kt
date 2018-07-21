@@ -3,7 +3,7 @@ package com.aceplus.mmhealthcare.data.vo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Author {
+class AuthorVO {
 
     @SerializedName("author-id")
     @Expose

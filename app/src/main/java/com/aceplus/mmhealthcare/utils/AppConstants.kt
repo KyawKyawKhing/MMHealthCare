@@ -1,4 +1,4 @@
-package com.aceplus.mmhealthcare
+package com.aceplus.mmhealthcare.utils
 
 /**
  * Created by kkk on 7/11/2018.

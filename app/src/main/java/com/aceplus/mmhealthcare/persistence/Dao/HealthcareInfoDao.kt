@@ -5,7 +5,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
-import com.aceplus.mmhealthcare.data.vo.HealthcareInfo
+import com.aceplus.mmhealthcare.data.vo.HealthcareInfoVO
 
 /**
  * Created by kkk on 7/11/2018.
@@ -14,12 +14,9 @@ import com.aceplus.mmhealthcare.data.vo.HealthcareInfo
 interface HealthcareInfoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(dataList: List<HealthcareInfo>)
+    fun insertAll(dataList: List<HealthcareInfoVO>)
 
     @Query("select * from health_care_info")
-    fun getAllData(): LiveData<List<HealthcareInfo>>
-
-//    @get:Query("SELECT * FROM health_care_info")
-//    val getAllData: LiveData<List<HealthcareInfo>>
+    fun getAllData(): LiveData<List<HealthcareInfoVO>>
 
 }

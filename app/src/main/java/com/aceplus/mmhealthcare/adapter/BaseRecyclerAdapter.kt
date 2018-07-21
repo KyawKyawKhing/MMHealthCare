@@ -8,7 +8,7 @@ import com.aceplus.mmhealthcare.viewholder.BaseViewHolder
 /**
  * Created by kkk on 7/10/2018.
  */
-abstract class BaseRecyclerAdapter<in V, O>(context: Context) : RecyclerView.Adapter<BaseViewHolder<O>>() {
+abstract class BaseRecyclerAdapter<O>(context: Context) : RecyclerView.Adapter<BaseViewHolder<O>>() {
     private var mDataList: List<O>? = null
     protected var mLayoutInflater: LayoutInflater? = null
 

@@ -10,50 +10,49 @@ import android.view.View
 import android.widget.Toast
 import com.aceplus.mmhealthcare.R
 import com.aceplus.mmhealthcare.adapter.HealthInfoListAdapter
-import com.aceplus.mmhealthcare.data.vo.HealthcareInfo
-import com.aceplus.mmhealthcare.delegate.HomeDelegate
+import com.aceplus.mmhealthcare.data.vo.HealthcareInfoVO
 import com.aceplus.mmhealthcare.mvp.presenter.HomePresenter
 import com.aceplus.mmhealthcare.mvp.view.HomeView
 import kotlinx.android.synthetic.main.activity_main.*
 import saschpe.android.customtabs.CustomTabsHelper
 import saschpe.android.customtabs.WebViewFallback
 
-class MainActivity : AppCompatActivity(), HomeView, HomeDelegate {
+class MainActivity : AppCompatActivity(), HomeView {
 
-    private var mAdapter: HealthInfoListAdapter? = null
-    private var mPresenter: HomePresenter? = null
+    private lateinit var mAdapter: HealthInfoListAdapter
+    private lateinit var mPresenter: HomePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mAdapter = HealthInfoListAdapter(applicationContext, this)
+        mPresenter = HomePresenter(this)
+        mAdapter = HealthInfoListAdapter(applicationContext, mPresenter)
         rvHealthInfo.adapter = mAdapter
         rvHealthInfo.layoutManager = LinearLayoutManager(this)
-        mPresenter = HomePresenter(this)
         progressBar.visibility = View.VISIBLE
-        mPresenter!!.getAllHealthInfo().observe(this, Observer<List<HealthcareInfo>> { response ->
-            displayHealthInfoList(response!!)
-            progressBar.visibility = View.GONE
+        mPresenter.getAllHealthInfo().observe(this, Observer<List<HealthcareInfoVO>> { response ->
+            if (response != null && response.isNotEmpty()) {
+                displayHealthInfoList(response)
+                progressBar.visibility = View.GONE
+            }
         })
-        mPresenter!!.getErrorMessage().observe(this, Observer<String> { message ->
+        mPresenter.getErrorMessage().observe(this, Observer<String> { message ->
             displayMessage(message!!)
             progressBar.visibility = View.GONE
         })
     }
 
-    override fun displayHealthInfoList(dataList: List<HealthcareInfo>) {
-        mAdapter!!.setNewList(dataList)
+    override fun displayHealthInfoList(dataList: List<HealthcareInfoVO>) {
+        mAdapter.setNewList(dataList)
+        emptyView.visibility = View.GONE
     }
 
     override fun displayMessage(message: String) {
+        emptyView.visibility = View.VISIBLE
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onTapItemList(url: String) {
-        displayUrl(url)
-    }
-
-    private fun displayUrl(url: String) {
+    override fun displayUrl(url: String) {
         val customTabsIntent = CustomTabsIntent.Builder()
                 .addDefaultShareMenuItem()
                 .setToolbarColor(this.resources.getColor(R.color.colorPrimary))

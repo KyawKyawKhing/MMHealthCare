@@ -11,7 +11,7 @@ import io.reactivex.annotations.NonNull
  * Created by kkk on 7/10/2018.
  */
 @Entity(tableName = "health_care_info")
-class HealthcareInfo {
+class HealthcareInfoVO {
 
     @NonNull
     @PrimaryKey
@@ -30,7 +30,7 @@ class HealthcareInfo {
     @SerializedName("author")
     @Expose
     @Embedded
-    var author: Author? = null
+    var author: AuthorVO? = null
 
     @SerializedName("short-description")
     @Expose
